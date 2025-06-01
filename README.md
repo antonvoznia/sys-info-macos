@@ -89,3 +89,38 @@ Notes:
 
 - PID: 0 entries are filtered out internally — only valid processes are shown.
 - CPU usage time is the sum of system and user mode times in seconds.
+
+## Sanity Tests and GitHub Actions
+
+This project includes a basic sanity test suite written as a shell script:
+  tests/sanity-tests.sh
+
+The test script verifies:
+- That shows --help page correctly
+- That the compiled binary runs successfully
+- That the output includes expected column
+- That JSON output is valid when the --json flag is used
+
+These checks ensure that changes do not break core functionality.
+
+## GitHub Actions CI
+
+
+A GitHub Actions workflow is configured in:
+  .github/workflows/sanity-tests.yml
+
+It automatically runs on every commit and pull request to the 'main' branch.
+
+The workflow performs:
+1. Repository checkout
+2. Project build using `make`
+3. Execution of the sanity test script
+
+This ensures that the codebase remains stable, builds correctly, and produces expected output.
+
+To run the sanity tests locally:
+```
+make # to build the tool
+chmod +x tests/sanity-tests.sh
+./tests/sanity-tests.sh
+```
