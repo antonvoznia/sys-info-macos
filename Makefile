@@ -1,6 +1,6 @@
 # Makefile for sys-info
 
-CXX = g++
+CXX = clang++
 CXXFLAGS = -Wall -Wextra -std=c++20
 TARGET = sys-info
 SRCS = main.cpp proc/prochandling.cpp
