@@ -69,6 +69,6 @@ int main(int argc, char **argv) {
   }
   std::cout << output << std::endl;
 
-  return ERROR_CODE;
+  return SUCCESS_CODE;
 }
 
