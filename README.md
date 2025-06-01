@@ -13,14 +13,14 @@ It shows:
 
 To build the tool, use:
 ```
-    make
+make
 ```
 
 This compiles main.cpp and proc/prochandling.cpp into a main executable using g++.
 
 Alternatively, compile manually with:
 ```
-    clang++ main.cpp -std=c++20 -o main proc/prochandling.cpp
+clang++ main.cpp -std=c++20 -o main proc/prochandling.cpp
 ```
 
 ## Output Formats:
@@ -38,6 +38,7 @@ PID    Name                           User                          Mem         
 
 2. JSON format:
 
+```
 [
   {
     "PID": "2112",
@@ -54,7 +55,7 @@ PID    Name                           User                          Mem         
     "CPU": "1.01"
   }
 ]
-
+```
 ## Command-line Flags:
 
 The following options are supported:
