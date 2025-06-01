@@ -72,7 +72,7 @@ std::string prochandling::getUserNameForPid(const pid_t pid) {
   uid_t uid = kp.kp_eproc.e_ucred.cr_uid;
   struct passwd *pw = getpwuid(uid);
   if (pw) {
-    return std::move(std::string(pw->pw_name));
+    return std::string(pw->pw_name);
   }
   return NA;
 }
@@ -80,7 +80,7 @@ std::string prochandling::getUserNameForPid(const pid_t pid) {
 std::string prochandling::generateJson(const std::vector<proc_info_t> &ps, const int num) {
   std::string ret = "[";
 
-  for (size_t i = 0; i < ps.size(); ++i) {
+  for (int i = 0; i < num; ++i) {
     std::string obj = std::format(
         "{{"
         "\"{}\": \"{}\", \n"
@@ -96,7 +96,7 @@ std::string prochandling::generateJson(const std::vector<proc_info_t> &ps, const
         PROC_INFO_FIELDS[PROC_INFO::CPU], ps[i].cpu);
 
     ret += obj;
-    if (i != ps.size() - 1) {
+    if (i != (int) ps.size() - 1) {
       ret += ",\n";
     }
   }
