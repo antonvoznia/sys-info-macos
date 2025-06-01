@@ -26,12 +26,13 @@ clang++ main.cpp -std=c++20 -o main proc/prochandling.cpp
 ## Output Formats:
 
 1. Default (table format):
-
+```
 PID    Name                           User                          Mem         CPU (s)
 ---------------------------------------------------------------------------------------
 1      launchd                        root                          1.41        0.00
 542    WindowServer                   SuperUser                     9.99        2.91
 ...
+```
 
 - Memory is shown in megabytes (rounded to string format)
 - CPU time is total (user + system) in seconds
