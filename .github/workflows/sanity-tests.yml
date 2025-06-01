@@ -1,4 +1,4 @@
-me: Build and Run Sanity Tests
+name: Build and Run Sanity Tests
 
 on:
   push:
