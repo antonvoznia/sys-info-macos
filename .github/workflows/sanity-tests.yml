@@ -1,0 +1,28 @@
+me: Build and Run Sanity Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Xcode command line tools
+      run: xcode-select --install || echo "Already installed"
+
+    - name: Build project
+      run: make
+
+    - name: Make test script executable
+      run: chmod +x tests/sanity-tests.sh
+
+    - name: Run sanity tests
+      run: ./tests/sanity-tests.sh
+

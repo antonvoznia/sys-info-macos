@@ -8,12 +8,15 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+ret=0
+
 pass() {
     echo -e "${GREEN}[PASS] $1${NC}"
 }
 
 fail() {
     echo -e "${RED}[FAIL] $1${NC}"
+    ret=1
 }
 
 if [ ! -f "$BIN" ]; then
@@ -50,3 +53,5 @@ test_help_output
 test_table_output_nonempty
 test_json_output_valid
 test_output_file_write
+
+exit $ret
