@@ -115,6 +115,8 @@ The workflow performs:
 1. Repository checkout
 2. Project build using `make`
 3. Execution of the sanity test script
+<img width="399" alt="obrazek" src="https://github.com/user-attachments/assets/3280df90-beb3-4e05-956d-2475fda575c5" />
+
 
 This ensures that the codebase remains stable, builds correctly, and produces expected output.
 
