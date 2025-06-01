@@ -96,7 +96,7 @@ std::string prochandling::generateJson(const std::vector<proc_info_t> &ps, const
         PROC_INFO_FIELDS[PROC_INFO::CPU], ps[i].cpu);
 
     ret += obj;
-    if (i != (int) ps.size() - 1) {
+    if (i != (int) num - 1) {
       ret += ",\n";
     }
   }
