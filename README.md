@@ -16,7 +16,7 @@ To build the tool, use:
 make
 ```
 
-This compiles main.cpp and proc/prochandling.cpp into a main executable using g++.
+This compiles main.cpp and proc/prochandling.cpp into a main executable using clang++.
 
 Alternatively, compile manually with:
 ```
