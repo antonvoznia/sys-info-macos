@@ -29,13 +29,9 @@ std::pair<std::vector<proc_info_t>, int> prochandling::getAndFillAllPids() {
   }
 
   bool pid0_found = false;
-  for (int i = 0; i < numProcs; ++i) {
-    switch (pids[i]) {
-      //skip process with PID 0
-      case 0: pid0_found = true; break;
-      default:
-          ps_info[i].pid = pids[i];
-    }
+  for (int i = 0, j = 0; i < numProcs; ++i) {
+    if (pids[i] == 0) { pid0_found = true; continue; }
+    ps_info[j++].pid = pids[i];
   }
 
   // Decrease number of PIDs since we skipped PID 0.
