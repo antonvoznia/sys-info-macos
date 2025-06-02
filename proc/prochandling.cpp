@@ -3,6 +3,11 @@
 const char *PROC_INFO_FIELDS[] = {"PID", "Name", "User", "Mem", "CPU"};
 
 std::pair<std::vector<proc_info_t>, int> prochandling::getAndFillAllPids() {
+  /*
+    Get the number of PIDs currently running.
+    So we can put empty buffer for the firs interation
+    of this function.
+  */
   int numProcs = proc_listpids(PROC_ALL_PIDS, 0, nullptr, 0);
 
   // No process found, see perror for more information.
@@ -23,11 +28,20 @@ std::pair<std::vector<proc_info_t>, int> prochandling::getAndFillAllPids() {
     return {{}, 0};
   }
 
+  bool pid0_found = false;
   for (int i = 0; i < numProcs; ++i) {
-    ps_info[i].pid = pids[i];
+    switch (pids[i]) {
+      //skip process with PID 0
+      case 0: pid0_found = true; break;
+      default:
+          ps_info[i].pid = pids[i];
+    }
   }
 
-  return {std::move(ps_info), numProcs};
+  // Decrease number of PIDs since we skipped PID 0.
+  numProcs -= pid0_found ? 1 : 0;
+
+  return {ps_info, numProcs};
 }
 
 void prochandling::fillProcBaseInfo(proc_info_t &ps) {
@@ -80,6 +94,11 @@ std::string prochandling::getUserNameForPid(const pid_t pid) {
 std::string prochandling::generateJson(const std::vector<proc_info_t> &ps, const int num) {
   std::string ret = "[";
 
+  /*
+    To avoid any complication with JSON
+    third party libraries, I used simple std::format
+    print in json format.
+  */
   for (int i = 0; i < num; ++i) {
     std::string obj = std::format(
         "{{"

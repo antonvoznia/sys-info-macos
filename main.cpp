@@ -1,21 +1,21 @@
 #include <iostream>
 #include <vector>
-
-#include "proc/prochandling.h"
-
-#include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
 #include <utility>
+
+#include "proc/prochandling.h"
 
 constexpr int SUCCESS_CODE = 0;
 constexpr int ERROR_CODE = 1;
 
 int main(int argc, char **argv) {
+
   bool jsonOutput = false;
   std::string outputFile;
   bool showHelp = false;
+
+   int ret = SUCCESS_CODE;
 
   // Parse arguments
   for (int i = 1; i < argc; ++i) {
@@ -25,10 +25,16 @@ int main(int argc, char **argv) {
     } else if (arg == "--help" || arg == "-h") {
       showHelp = true;
     } else if ((arg == "--output-file" || arg == "-o") && i + 1 < argc) {
-      outputFile = argv[++i];
+      if (i + 1 < argc) {
+        outputFile = argv[++i];
+      } else {
+        std::cerr << "Error: Missing file after " << arg << "\n";
+        return ERROR_CODE;
+      }
     } else {
       std::cerr << "Unknown argument: " << arg << "\n";
       showHelp = true;
+      ret = ERROR_CODE;
       break;
     }
   }
@@ -40,7 +46,7 @@ int main(int argc, char **argv) {
       "  -j, --json          Output in JSON format\n"
       "  -o, --output-file   Write output to a specified file\n"
       "  -h, --help          Show this help message\n";
-    return SUCCESS_CODE;
+    return ret;
   }
 
   // Gather and process data

@@ -26,7 +26,7 @@ extern const char* PROC_INFO_FIELDS[];
 
 /*
  Own implementation of proc_info_t
- to store only specific/needed information
+ to store only specific/needed information.
  */
 struct proc_info_t {
     pid_t pid = 0;
@@ -38,13 +38,25 @@ struct proc_info_t {
 
 namespace prochandling {
     constexpr char NA[] = "N/A";
+
+    // Retrieve list of all running PIDs using macOS-specific API
     std::pair<std::vector<proc_info_t>, int> getAndFillAllPids();
+    
+    // Fill stcuture proc_info_t passed as argument.
     void extractProcInfo(proc_info_t &ps);
+
+    // Fill process name and user name of proc_info struct.
     void fillProcBaseInfo(proc_info_t &ps);
+
+    // Fill memory (MiB) consumption and CPU usage in time (sec).
     void fillExtendedInfo(proc_info_t &ps);
-    std::string getUserNameForPid(const pid_t);
+
+    // Return username who started process with pid.
+    std::string getUserNameForPid(const pid_t pid);
+
     // Generate JSON string from vector of proc_info_t
     std::string generateJson(const std::vector<proc_info_t> & ps, const int num);
+    
     // It will generate a string table from vector of proc_info_t 
     std::string generateTable(const std::vector<proc_info_t> & ps, const int num);
 }
