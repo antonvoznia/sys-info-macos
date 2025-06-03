@@ -103,6 +103,11 @@ The test script verifies:
 
 These checks ensure that changes do not break core functionality.
 
+## JSON visualizer
+To visualize the JSON output, you can use a [simple tool](https://github.com/antonvoznia/json-process-visualizer).
+
+You can modify the script to visualize ot according to your requirements.
+
 ## GitHub Actions CI
 
 
